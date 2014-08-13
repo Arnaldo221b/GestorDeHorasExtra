@@ -66,5 +66,60 @@ Public Class ServicioWeb
         End Try
     End Sub
 
+
+    <WebMethod(True)> _
+    Public Sub insertarHoraExtra(cantidad As Integer, valor As Double, pagoTotal As Double, fecha As Date, IDUsuario As Integer, vigente As Boolean)
+
+        Dim ejecutivoBL As New clsEjecutivo()
+        Try
+            ejecutivoBL.insertarHoraExtra(cantidad, valor, pagoTotal, fecha, IDUsuario, vigente)
+
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+
+    <WebMethod(True)> _
+    Public Function ObtenerUsuarios() As String
+        Try
+
+            If Not Session.Item("UsuarioLogueado") Is Nothing Then
+
+                Dim auxUsuario As Usuario = Session.Item("UsuarioLogueado")
+                Dim ejecutivoBL As New clsEjecutivo()
+                Dim tabla As DataTable = ejecutivoBL.ObtenerUsuarios(auxUsuario.Id)
+
+                If Not tabla Is Nothing Then
+
+                    Dim utilidadesBL As New clsUtilidades()
+                    Return utilidadesBL.ConvertDataTabletoString(tabla)
+                Else
+                    Return ""
+                End If
+
+            Else
+                Return ""
+            End If
+
+        Catch ex As Exception
+            Return ""
+        End Try
+    End Function
+
+    'BorrarHoraExtra
+    <WebMethod(True)> _
+    Public Sub BorrarHoraExtra(pidHoraExtra As Integer)
+
+        Dim ejecutivoBL As New clsEjecutivo()
+        Try
+            ejecutivoBL.BorrarHoraExtra(pidHoraExtra)
+
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+
 End Class
 

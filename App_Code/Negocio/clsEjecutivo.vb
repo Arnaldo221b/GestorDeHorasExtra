@@ -92,6 +92,7 @@ Public Class clsEjecutivo
 
     End Sub
 
+
     ''' <summary>
     '''  Permite dar de baja un registro de hora extra
     ''' </summary>
@@ -184,5 +185,50 @@ Public Class clsEjecutivo
         End Try
 
     End Sub
+
+    Public Function ObtenerUsuarios(pidSupervisor As Integer) As DataTable
+        Dim resultado As New DataSet
+        Dim adapter As New SqlDataAdapter
+        Dim comando As New SqlCommand
+
+        Try
+
+            Dim paramIdSupervisor As New SqlParameter("@idSupervisor", pidSupervisor)
+
+            'SE DEFINE LA CONSULTA A HACER A LA BD
+            With comando
+                'TIPO PROCEDIMIENTO ALMACENADO
+                .CommandType = CommandType.StoredProcedure
+                'NOMBRE DEL PROCEDIMIENTO ALMACENADO
+                .CommandText = "sp_ObtenerUsuarios"
+                'PARAMETROS
+                .Parameters.Add(paramIdSupervisor)
+                'LA CONEXION A LA BD
+                .Connection = conexion
+            End With
+
+            conexion.Open()
+            adapter.SelectCommand = comando
+            adapter.Fill(resultado)
+            adapter.Dispose()
+            comando.Dispose()
+            conexion.Close()
+
+            If resultado.Tables.Count > 0 Then
+                Return resultado.Tables(0)
+            Else
+                Return New DataTable
+            End If
+
+        Catch ex As Exception
+            Return New DataTable
+        Finally
+            If conexion.State <> ConnectionState.Closed Then
+                conexion.Close()
+            End If
+        End Try
+
+    End Function
+
 
 End Class

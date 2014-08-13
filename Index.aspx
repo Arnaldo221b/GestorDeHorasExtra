@@ -14,19 +14,22 @@
     <form id="form1" runat="server">
 
       <div class="container well">
-        
-        <fieldset>
-        <legend>Inicio de Sesión</legend>
-           
-            <label for="txtUsuario">Usuario</label>
-            <input type="text" id="txtUsuario" placeholder="Nombre Usuario" />
-            
-            <label for="txtPassword">Contraseña</label>
-            <input type="password" id="txtPassword" placeholder="Ingrese password" />
-            <br />
-            <a href="#" class="btn btn-primary" id="btnAceptar" >Aceptar</a>     
-         </fieldset>
-         <div id="msjError" style="margin-top:1em; display:none;">
+        <div class="row">
+            <div class="col-md-4">
+                <fieldset>
+                <legend>Inicio de Sesión</legend>
+                   
+                    <label for="txtUsuario">Usuario</label>
+                    <input class="form-control" type="text" id="txtUsuario" placeholder="Nombre Usuario" />
+                    
+                    <label for="txtPassword">Contraseña</label>
+                    <input class="form-control" type="password" id="txtPassword" placeholder="Ingrese password" />
+                    <br />
+                    <a href="#" class="btn btn-primary" id="btnAceptar" >Aceptar</a>     
+                 </fieldset>
+                 <div id="msjError" style="margin-top:1em; display:none;">
+                 </div>
+            </div>
          </div>
       </div>
 
